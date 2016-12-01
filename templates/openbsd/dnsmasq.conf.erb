@@ -50,7 +50,7 @@ dhcp-authoritative
 <% @networks.keys.sort.each do | network_key |
      network = @networks[network_key]
      network['ranges'].each do | dhcp_range | -%>
-dhcp-range=<%= dhcp_range.join(',') %>,<% if network.key?('lease') %><%= network['lease'] %><% else %><%= @default_lease %><% end %>
+dhcp-range=set:<%= network_key %>,<%= dhcp_range.join(',') %>,<% if network.key?('lease') %><%= network['lease'] %><% else %><%= @default_lease %><% end %>
 <%   end
      network['hosts'].keys.sort.each do | hostname |
        if network['hosts'][hostname].key?('mac') -%>
