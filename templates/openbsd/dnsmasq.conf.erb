@@ -54,7 +54,7 @@ dhcp-range=set:<%= network_key %><%= index %>,<%= dhcp_range.join(',') %>,<% if 
 <%   end
      network['hosts'].keys.sort.each do | hostname |
        if network['hosts'][hostname].key?('mac') -%>
-dhcp-host=<%= network['hosts'][hostname]['mac'] %>,<%= hostname %>,infinite
+dhcp-host=<%= network['hosts'][hostname]['mac'] %>,<%= hostname %>,infinite<% if network['hosts'][hostname].key?('tag') %>,set:<%= network['hosts'][hostname]['tag'] %><% end %>
 <%     else -%>
 dhcp-host=<%= hostname %>
 <%     end
