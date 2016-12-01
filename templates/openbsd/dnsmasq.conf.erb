@@ -47,10 +47,10 @@ cname=<%= hostname %>,<%= network['hosts'][hostname]['cname'] %>
 <% if @authoritative -%>
 dhcp-authoritative
 <% end -%>
-<% @networks.keys.sort.each do | network_key |
+<% @networks.keys.sort.each_with_index do | network_key,index |
      network = @networks[network_key]
      network['ranges'].each do | dhcp_range | -%>
-dhcp-range=set:<%= network_key %>,<%= dhcp_range.join(',') %>,<% if network.key?('lease') %><%= network['lease'] %><% else %><%= @default_lease %><% end %>
+dhcp-range=set:<%= network_key %><%= index %>,<%= dhcp_range.join(',') %>,<% if network.key?('lease') %><%= network['lease'] %><% else %><%= @default_lease %><% end %>
 <%   end
      network['hosts'].keys.sort.each do | hostname |
        if network['hosts'][hostname].key?('mac') -%>
